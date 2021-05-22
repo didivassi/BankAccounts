@@ -9,15 +9,16 @@ public class Person {
 
     private List<String> myAccounts = new ArrayList<String>();
 
-    public void openAccount(Bank bank, AccountType accountType, float amount){
+    public String openAccount(Bank bank, AccountType accountType, float amount){
 
         String bankAccountId = bank.createAccount(this, accountType, amount);
         if(bankAccountId==null){
             System.out.println("Error! Opening account");
-            return;
+            return null;
         }
         myAccounts.add(bankAccountId);
         System.out.println("I've just opened a "+ accountType+ " account!");
+        return bankAccountId;
     }
 
     public void askCard(int index){

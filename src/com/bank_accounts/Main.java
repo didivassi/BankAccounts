@@ -20,12 +20,12 @@ public class Main {
 
         Bank CGD = new Bank("CGD");
         Person diogo=new Person();
-        diogo.openAccount(CGD, AccountType.CHECKING,1000f);
-        diogo.openAccount(CGD,AccountType.SAVINGS,3000f);
+        String Checking=diogo.openAccount(CGD, AccountType.CHECKING,1000f);
+        String Savings = diogo.openAccount(CGD,AccountType.SAVINGS,3000f);
 
         diogo.listAccounts();
-        String Checking=diogo.getAccount(0);
-        String Savings=diogo.getAccount(1);
+        //String Checking=diogo.getAccount(0);
+        //String Savings=diogo.getAccount(1);
         diogo.makeDeposit(CGD,Checking,10);
     }
 }

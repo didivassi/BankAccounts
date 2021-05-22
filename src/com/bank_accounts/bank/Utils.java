@@ -14,4 +14,13 @@ public class Utils {
         String[] temp=idAccount.split("-");
         return temp[0];
     }
+
+    protected static boolean isNegativeAmount(float amount){
+        if(amount<0){
+            System.out.println("Amount can't be negative");
+            return true;
+        }
+
+        return false;
+    }
 }

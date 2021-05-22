@@ -18,7 +18,7 @@ public class Bank {
         String idAccount;
         Account accountToOpen;
 
-        if(isNegativeAmount(amount)){
+        if(Utils.isNegativeAmount(amount)){
             return null;
         }
         switch (accountType){
@@ -51,9 +51,12 @@ public class Bank {
 
     }
 
-    public void withdraw(Account account, float amount){
+    public void withdraw(String accountId, float amount){
 
-
+        Account account=getAccountFromId(accountId);
+        if(account==null){
+            return;
+        }
         if(account.getBalance()-amount<0){
             System.out.println("You can't have negative balances");
             return;
@@ -66,15 +69,19 @@ public class Bank {
 
     }
 
-    public void deposit(Account account, float amount){
-        if(isNegativeAmount(amount)){
+    public void deposit(String accountId, float amount){
+        if(Utils.isNegativeAmount(amount)){
+            return;
+        }
+        Account account=getAccountFromId(accountId);
+        if(account==null){
             return;
         }
         account.setBalance(amount);
     }
 
     public void transferTo(Account accountFrom, Account accountTo, float amount){
-        if(isNegativeAmount(amount)){
+        if(Utils.isNegativeAmount(amount)){
             return;
         }
         if(accountFrom.getBalance()-amount<0){
@@ -97,7 +104,6 @@ public class Bank {
     private boolean accountExists(String idAccount){
         String tempBrand= Utils.parseBrandFromIdAccount(idAccount);
         int tempId= Utils.parseIdAccount(idAccount);
-
         if(!tempBrand.equals(brand)){
             System.out.println("This account is not from this Bank");
             return false;
@@ -114,18 +120,10 @@ public class Bank {
     }
 
 
-    public void getBalance(String idAccount){
-      // account.getBalance();
+    public float getBalance(String idAccount){
+        return  getAccountFromId(idAccount).getBalance();
     }
 
-    private boolean isNegativeAmount(float amount){
-        if(amount<0){
-            System.out.println("Amount can't be negative");
-            return true;
-        }
-
-        return false;
-    }
 
 
 }
