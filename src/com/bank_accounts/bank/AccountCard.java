@@ -2,10 +2,10 @@ package com.bank_accounts.bank;
 
 public class AccountCard {
     private String accountId;
-    public AccountCard(String accountId){
+    protected AccountCard(String accountId){
         this.accountId=accountId;
     }
-    protected String getAccountId(){
+    public String getAccountId(){
         return accountId;
     }
 }

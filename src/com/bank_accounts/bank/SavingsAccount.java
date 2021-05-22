@@ -6,5 +6,10 @@ public class SavingsAccount extends Account {
         super(amount, AccountType.SAVINGS);
     }
 
+    @Override
+    protected boolean canHaveCard(){
+        return false;
+    }
+
 
 }

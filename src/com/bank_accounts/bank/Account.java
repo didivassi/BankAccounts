@@ -6,20 +6,19 @@ public abstract class Account {
 
     private float balance;
     private Person person;
-    private String id;
+    private String accountId;
     private AccountType type;
-    protected boolean hasCard;
+    private float minBalance;
 
-    public Account(float openBalance, AccountType type){
+
+    protected Account(float openBalance, AccountType type){
         balance=openBalance;
         this.type=type;
         person=null;
-        hasCard=false;
+
     }
 
-    protected void giveCard(){
-        System.out.println("This type of account doesn't have a card");
-    }
+    protected abstract boolean canHaveCard();
 
     protected float getBalance() {
         return balance;
@@ -35,7 +34,10 @@ public abstract class Account {
         return person;
     }
 
-    protected void setId(String id){
-        this.id=id;
+    protected void setAccountId(String accountId){
+        this.accountId=accountId;
+    }
+    protected String getAccountId(){
+        return accountId;
     }
 }

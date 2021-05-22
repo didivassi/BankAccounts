@@ -1,5 +1,6 @@
 package com.bank_accounts;
 
+import com.bank_accounts.bank.AccountCard;
 import com.bank_accounts.bank.AccountType;
 import com.bank_accounts.bank.Bank;
 
@@ -20,12 +21,18 @@ public class Main {
 
         Bank CGD = new Bank("CGD");
         Person diogo=new Person();
-        String Checking=diogo.openAccount(CGD, AccountType.CHECKING,1000f);
-        String Savings = diogo.openAccount(CGD,AccountType.SAVINGS,3000f);
+        String CheckingAccountId=diogo.openAccount(CGD, AccountType.CHECKING,1000f);
+        String SavingsAccountId = diogo.openAccount(CGD,AccountType.SAVINGS,3000f);
+
+        AccountCard chekingCard=diogo.askCard(CGD,CheckingAccountId);
+
+        AccountCard chekingCardCopy=diogo.askCard(CGD,CheckingAccountId);
+
+        diogo.makeWithdraw(CGD,chekingCard,100);
 
         diogo.listAccounts();
         //String Checking=diogo.getAccount(0);
         //String Savings=diogo.getAccount(1);
-        diogo.makeDeposit(CGD,Checking,10);
+        diogo.makeDeposit(CGD,CheckingAccountId,10);
     }
 }
