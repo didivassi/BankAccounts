@@ -1,7 +1,5 @@
 package com.bank_accounts.bank;
 
-import com.bank_accounts.Person;
-
 public abstract class Account {
 
     private float balance;

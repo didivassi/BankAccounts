@@ -1,5 +1,6 @@
 package com.bank_accounts;
 
+import com.bank_accounts.Entities.Person;
 import com.bank_accounts.bank.AccountCard;
 import com.bank_accounts.bank.AccountType;
 import com.bank_accounts.bank.Bank;
@@ -28,7 +29,7 @@ public class Main {
         //open accounts
         String CheckingAccountId=diogo.openAccount(CGD, AccountType.CHECKING,1000f);
         String SavingsAccountId = diogo.openAccount(CGD,AccountType.SAVINGS,3000f);
-        //you cannot open if you don't have moneyUnderMatch
+        //you cannot open accounts if you don't have moneyUnderMatch
         String LoanAccountId = diogo.openAccount(CGD,AccountType.LOAN,3000f);
 
         //you can ask for cards

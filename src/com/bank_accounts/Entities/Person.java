@@ -1,4 +1,4 @@
-package com.bank_accounts;
+package com.bank_accounts.Entities;
 
 import com.bank_accounts.bank.AccountCard;
 import com.bank_accounts.bank.AccountType;
@@ -6,7 +6,7 @@ import com.bank_accounts.bank.Bank;
 import com.bank_accounts.bank.Account;
 import java.util.*;
 
-public class Person {
+public class Person extends Entity{
     private static int peopleCreated;
 
     private List<String> myAccounts = new ArrayList<String>();

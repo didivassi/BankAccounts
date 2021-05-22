@@ -1,6 +1,5 @@
 package com.bank_accounts.bank;
 
-import com.bank_accounts.Person;
 import java.util.*;
 
 public class Bank {
