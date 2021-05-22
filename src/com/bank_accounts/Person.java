@@ -26,12 +26,18 @@ public class Person {
             System.out.println("Non existing bank");
             return null;
         }
+        if(moneyUnderMatch-amount<0){
+            System.out.println("You don't have money under your match to open this account");
+            return null;
+        }
         String bankAccountId = bank.createAccount(this.personIdCard, accountType, amount);
         if(bankAccountId==null){
             System.out.println("Error! Opening account");
             return null;
         }
         myAccounts.add(bankAccountId);
+        moneyUnderMatch-=amount;
+
         System.out.println("I've just opened a "+ accountType+ " account!");
         return bankAccountId;
     }
