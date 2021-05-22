@@ -145,10 +145,10 @@ public class Bank {
     }
 
     private boolean accountBelongsToPerson(Account account, String personId){
-        if(account.getPerson()!=personId){
+        if(!account.getPerson().equals(personId)){
             System.out.println("This account doesn't belongs to you");
         }
-        return account.getPerson()==personId;
+        return account.getPerson().equals(personId);
     }
 
 
