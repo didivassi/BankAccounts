@@ -38,7 +38,7 @@ public class Bank {
 
         accountToOpen.setPerson(person);
         customerAccounts.add(accountToOpen);
-        idAccount=createAccountId(customerAccounts.size()-1);
+        idAccount=Utils.createAccountId(customerAccounts.size()-1,brand);
         accountToOpen.setId(idAccount);
 
         return idAccount;
@@ -86,20 +86,17 @@ public class Bank {
         accountTo.setBalance(amount);
     }
 
-    private String createAccountId(int idAccount){
-        return brand+"-"+idAccount;
-    }
 
     private Account getAccountFromId(String idAccount){
         if(!accountExists(idAccount)){
             return null;
         }
-        return customerAccounts.get(parseIdAcount(idAccount));
+        return customerAccounts.get(Utils.parseIdAccount(idAccount));
     }
 
     private boolean accountExists(String idAccount){
-        String tempBrand= parseBrandFromIdAccount(idAccount);
-        int tempId= parseIdAcount(idAccount);
+        String tempBrand= Utils.parseBrandFromIdAccount(idAccount);
+        int tempId= Utils.parseIdAccount(idAccount);
 
         if(!tempBrand.equals(brand)){
             System.out.println("This account is not from this Bank");
@@ -116,16 +113,6 @@ public class Bank {
         return account.getPerson()==person;
     }
 
-
-    private int parseIdAcount(String idAccount){
-        String[] temp=idAccount.split("-");
-        return Integer.parseInt(temp[1]);
-    }
-
-    private String parseBrandFromIdAccount(String idAccount){
-        String[] temp=idAccount.split("-");
-        return temp[0];
-    }
 
     public void getBalance(String idAccount){
       // account.getBalance();
