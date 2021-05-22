@@ -66,7 +66,7 @@ public class Bank {
             return ((CardAccount) account).attributeCard();
         }
 
-        if(isBalanceAllowed(account, 1f)){
+        if(!isBalanceAllowed(account, 1f)){
             System.out.println("You already have a card but you don't have engouth balance to pay a fee");
             return null;
         }
@@ -87,7 +87,7 @@ public class Bank {
         if(account==null){
             return;
         }
-        if(isBalanceAllowed(account, amount)){
+        if(!isBalanceAllowed(account, amount)){
             return;
         }
 
@@ -155,9 +155,9 @@ public class Bank {
     private boolean isBalanceAllowed(Account account, float amount){
         if(account.getBalance() - amount < account.getMinBalance()){
             System.out.println("You can't have a balance lower than " + account.getMinBalance() );
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
 

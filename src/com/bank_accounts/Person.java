@@ -7,12 +7,17 @@ import com.bank_accounts.bank.Account;
 import java.util.*;
 
 public class Person {
+    private static int peopleCreated;
 
     private List<String> myAccounts = new ArrayList<String>();
 
-    private int personIdCard;
-    public Person(){
-        personIdCard=++personIdCard;
+
+    private String personIdCard;
+    private float moneyUnderMatch;
+    public Person(float moneyUnderMatch){
+        peopleCreated++;
+        personIdCard=String.valueOf(peopleCreated);
+        this.moneyUnderMatch=moneyUnderMatch;
     }
 
     public String openAccount(Bank bank, AccountType accountType, float amount){
@@ -21,7 +26,7 @@ public class Person {
             System.out.println("Non existing bank");
             return null;
         }
-        String bankAccountId = bank.createAccount(String.valueOf(this.personIdCard), accountType, amount);
+        String bankAccountId = bank.createAccount(this.personIdCard, accountType, amount);
         if(bankAccountId==null){
             System.out.println("Error! Opening account");
             return null;
@@ -36,7 +41,7 @@ public class Person {
             System.out.println("Non existing bank");
             return null;
         }
-       return bank.sendCard(bankAccountId,String.valueOf(this.personIdCard));
+       return bank.sendCard(bankAccountId,this.personIdCard);
     }
 
     public void makeDeposit(Bank bank, String bankAccountId, float amount){
@@ -72,7 +77,6 @@ public class Person {
 
     }
 
-
     public String getAccount(int index){
         if(index<0 || index>myAccounts.size()){
             return null;
@@ -83,7 +87,7 @@ public class Person {
         return null;
     }
 
-    public int getPersonIdCard() {
+    private String getPersonIdCard() {
         return personIdCard;
     }
 }
