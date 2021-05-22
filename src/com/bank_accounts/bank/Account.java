@@ -14,6 +14,7 @@ public abstract class Account {
     protected Account(float openBalance, AccountType type){
         balance=openBalance;
         this.type=type;
+        this.minBalance=type.minBalance;
         person=null;
 
     }
@@ -22,6 +23,10 @@ public abstract class Account {
 
     protected float getBalance() {
         return balance;
+    }
+
+    protected float getMinBalance() {
+        return minBalance;
     }
 
     protected void setBalance(float amount){

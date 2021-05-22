@@ -25,8 +25,8 @@ public class Bank {
         if(Utils.isNegativeAmount(amount)){
             return null;
         }
-        if(amount < accountType.minAmount){
-            System.out.println("You need to open this account with at least " + accountType.minAmount);
+        if(amount < accountType.minAmountToOpen){
+            System.out.println("You need to open this account with at least " + accountType.minAmountToOpen);
             return null;
         }
         switch (accountType){
@@ -35,6 +35,9 @@ public class Bank {
                 break;
             case SAVINGS:
                 accountToOpen= new SavingsAccount(amount);
+                break;
+            case LOAN:
+                accountToOpen= new LoanAccount(amount);
                 break;
             default:
                 System.out.println("You need to choose between Checking or Savings when open an account");
@@ -66,7 +69,7 @@ public class Bank {
             return ((CardAccount) account).attributeCard();
         }
 
-        if(willBalanceBecomeNegative(account, 1f)){
+        if(isBalanceAllowed(account, 1f)){
             System.out.println("You already have a card but you don't have engouth balance to pay a fee");
             return null;
         }
@@ -87,7 +90,7 @@ public class Bank {
         if(account==null){
             return;
         }
-        if(willBalanceBecomeNegative(account, amount)){
+        if(isBalanceAllowed(account, amount)){
             return;
         }
 
@@ -115,7 +118,7 @@ public class Bank {
         if(accountFrom==null){
             return;
         }
-        if(willBalanceBecomeNegative(accountFrom, amount)){
+        if(isBalanceAllowed(accountFrom, amount)){
             return;
         }
         accountFrom.setBalance(-amount);
@@ -152,9 +155,9 @@ public class Bank {
     }
 
 
-    private boolean willBalanceBecomeNegative(Account account, float amount){
-        if(account.getBalance()-amount<0){
-            System.out.println("You can't have negative balances");
+    private boolean isBalanceAllowed(Account account, float amount){
+        if(account.getBalance() - amount < account.getMinBalance()){
+            System.out.println("You can't have a balance lower than " + account.getMinBalance() );
             return true;
         }
         return false;
