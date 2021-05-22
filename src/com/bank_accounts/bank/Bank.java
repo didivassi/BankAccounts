@@ -51,9 +51,9 @@ public class Bank {
 
     }
 
-    public void withdraw(String accountId, float amount){
+    public void withdraw(AccountCard card ,float amount){
 
-        Account account=getAccountFromId(accountId);
+        Account account=getAccountFromId(card.getAccountId());
         if(account==null){
             return;
         }
