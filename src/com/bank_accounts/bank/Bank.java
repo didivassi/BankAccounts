@@ -5,20 +5,17 @@ import java.util.*;
 
 public class Bank {
 
-    final private static List<Bank> BANKS= new ArrayList<Bank>();
+
 
     final private List<Account> customerAccounts = new ArrayList<Account>();
     private String brand;
 
-    public Bank(String brand){
+    protected Bank(String brand){
         this.brand=brand;
     }
 
-    public void createBank(String brand){
-        //check if brand exist
-    }
 
-    public String createAccount(Person person, AccountType accountType, float amount){
+    public String createAccount(String personId, AccountType accountType, float amount){
         String idAccount;
         Account accountToOpen;
 
@@ -44,7 +41,7 @@ public class Bank {
                 return null;
         }
 
-        accountToOpen.setPerson(person);
+        accountToOpen.setPerson(personId);
         customerAccounts.add(accountToOpen);
         idAccount=Utils.createAccountId(customerAccounts.size()-1,brand);
         accountToOpen.setAccountId(idAccount);
@@ -52,12 +49,12 @@ public class Bank {
         return idAccount;
     }
 
-    public AccountCard sendCard(String accountId, Person person){
+    public AccountCard sendCard(String accountId, String personId){
         Account account=getAccountFromId(accountId);
         if(account==null){
             return null;
         }
-        if(!accountBelongsToPerson(account, person)){
+        if(!accountBelongsToPerson(account, personId)){
             return null;
         }
         if (!account.canHaveCard()){
@@ -147,11 +144,11 @@ public class Bank {
         return true;
     }
 
-    private boolean accountBelongsToPerson(Account account, Person person){
-        if(account.getPerson()!=person){
+    private boolean accountBelongsToPerson(Account account, String personId){
+        if(account.getPerson()!=personId){
             System.out.println("This account doesn't belongs to you");
         }
-        return account.getPerson()==person;
+        return account.getPerson()==personId;
     }
 
 
@@ -164,18 +161,22 @@ public class Bank {
     }
 
 
-    public float getBalance(String idAccount, Person person){
+    public float getBalance(String idAccount, String personId){
         float balance=0f;
         if(!accountExists(idAccount)){
             return balance;
         }
         Account account=getAccountFromId(idAccount);
-        if(!accountBelongsToPerson(account,person)){
+        if(!accountBelongsToPerson(account,personId)){
             return balance;
         }
         return  getAccountFromId(idAccount).getBalance();
     }
 
 
+    @Override
+    public String toString(){
+        return brand;
+    }
 
 }

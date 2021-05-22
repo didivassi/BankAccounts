@@ -10,9 +10,18 @@ public class Person {
 
     private List<String> myAccounts = new ArrayList<String>();
 
+    private int personIdCard;
+    public Person(){
+        personIdCard=++personIdCard;
+    }
+
     public String openAccount(Bank bank, AccountType accountType, float amount){
 
-        String bankAccountId = bank.createAccount(this, accountType, amount);
+        if(bank==null){
+            System.out.println("Non existing bank");
+            return null;
+        }
+        String bankAccountId = bank.createAccount(String.valueOf(this.personIdCard), accountType, amount);
         if(bankAccountId==null){
             System.out.println("Error! Opening account");
             return null;
@@ -23,19 +32,34 @@ public class Person {
     }
 
     public AccountCard askCard(Bank bank, String bankAccountId){
-       return bank.sendCard(bankAccountId,this);
+        if(bank==null){
+            System.out.println("Non existing bank");
+            return null;
+        }
+       return bank.sendCard(bankAccountId,String.valueOf(this.personIdCard));
     }
 
     public void makeDeposit(Bank bank, String bankAccountId, float amount){
+        if(bank==null){
+            System.out.println("Non existing bank");
+            return;
+        }
     }
 
     public void makeWithdraw(Bank bank, AccountCard card, float amount){
+        if(bank==null){
+            System.out.println("Non existing bank");
+            return ;
+        }
         bank.withdraw(card,amount);
         System.out.println("You have just withdraw " + amount + "€ from your account " + card.getAccountId());
     }
 
     public void makeTransferTo(Bank bank, String bankAccountIdFrom, String bankAccountIdTo, float amount){
-
+        if(bank==null){
+            System.out.println("Non existing bank");
+            return;
+        }
     }
 
     public void listAccounts(){
@@ -47,6 +71,8 @@ public class Person {
         }
 
     }
+
+
     public String getAccount(int index){
         if(index<0 || index>myAccounts.size()){
             return null;
@@ -55,5 +81,9 @@ public class Person {
             return myAccounts.get(index);
         }
         return null;
+    }
+
+    public int getPersonIdCard() {
+        return personIdCard;
     }
 }

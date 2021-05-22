@@ -7,6 +7,7 @@ public abstract class CardAccount extends Account{
     public CardAccount(float openBalance, AccountType type) {
         super(openBalance, type);
     }
+
     @Override
     protected boolean canHaveCard(){
         return true;

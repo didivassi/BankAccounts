@@ -5,7 +5,7 @@ import com.bank_accounts.Person;
 public abstract class Account {
 
     private float balance;
-    private Person person;
+    private String personId;
     private String accountId;
     private AccountType type;
     private float minBalance;
@@ -15,7 +15,7 @@ public abstract class Account {
         balance=openBalance;
         this.type=type;
         this.minBalance=type.minBalance;
-        person=null;
+        personId=null;
 
     }
 
@@ -32,11 +32,11 @@ public abstract class Account {
     protected void setBalance(float amount){
         balance+=amount;
     }
-    protected void setPerson(Person person){
-        this.person=person;
+    protected void setPerson(String personId){
+        this.personId=personId;
     }
-    protected Person getPerson(){
-        return person;
+    protected String getPerson(){
+        return personId;
     }
 
     protected void setAccountId(String accountId){
