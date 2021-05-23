@@ -6,4 +6,11 @@ public class LoanAccount extends CardAccount{
         super(amount, AccountType.LOAN);
     }
 
+    @Override
+    protected void setBalance(float amount) {
+        super.setBalance(amount);
+        if(super.getBalance()<0);
+        super.setBalance(-1);
+        System.out.println("u paid a fee for negative balance");
+    }
 }

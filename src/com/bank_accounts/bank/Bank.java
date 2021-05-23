@@ -105,16 +105,20 @@ public class Bank {
         account.setBalance(amount);
     }
 
-    public void transferTo(AccountCard card, Account accountTo, float amount){
+    public void transferTo(Bank bankFrom, String accountIdFrom , Bank bankTo, String accountIdTo , float amount){
 
         if(Utils.isNegativeAmount(amount)){
             return;
         }
-        Account accountFrom=getAccountFromId(card.getAccountId());
+        Account accountFrom=getAccountFromId(accountIdFrom);
         if(accountFrom==null){
             return;
         }
         if(isBalanceAllowed(accountFrom, amount)){
+            return;
+        }
+        Account accountTo=bankTo.getAccountFromId(accountIdTo);
+        if(accountTo==null){
             return;
         }
         accountFrom.setBalance(-amount);

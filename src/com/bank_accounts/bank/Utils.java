@@ -10,7 +10,7 @@ public class Utils {
         String[] temp=idAccount.split("-");
         return Integer.parseInt(temp[1]);
     }
-    protected static String parseBrandFromIdAccount(String idAccount){
+    public static String parseBrandFromIdAccount(String idAccount){
         String[] temp=idAccount.split("-");
         return temp[0];
     }

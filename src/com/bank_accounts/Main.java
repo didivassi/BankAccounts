@@ -27,31 +27,41 @@ public class Main {
         //System.out.println(pedro.getPersonIdCard());
 
         //open accounts
-        String CheckingAccountId=diogo.openAccount(CGD, AccountType.CHECKING,1000f);
-        String SavingsAccountId = diogo.openAccount(CGD,AccountType.SAVINGS,3000f);
-        //you cannot open accounts if you don't have moneyUnderMatch
-        String LoanAccountId = diogo.openAccount(CGD,AccountType.LOAN,3000f);
+        String diogoCheckingAccountId=diogo.openAccount(CGD, AccountType.CHECKING,1000f);
+        String diogoSavingsAccountId = diogo.openAccount(CGD,AccountType.SAVINGS,3000f);
+        //you cannot open accounts if you don't have moneyOnWallet
+        String diogoLoanAccountId = diogo.openAccount(CGD,AccountType.LOAN,3000f);
 
         //you can ask for cards
-        AccountCard checkingCard=diogo.askCard(CGD,CheckingAccountId);
+        AccountCard diogoCheckingCard=diogo.askCard(CGD,diogoCheckingAccountId);
         //pay a fee if you lost it
-        AccountCard checkingCardCopy=diogo.askCard(CGD,CheckingAccountId);
+        AccountCard diogoCheckingCardCopy=diogo.askCard(CGD,diogoCheckingAccountId);
         //only allowed accounts can have cards
-        AccountCard SavingCard=diogo.askCard(CGD,SavingsAccountId);
+        AccountCard diogoSavingCard=diogo.askCard(CGD,diogoSavingsAccountId);
         //validate if you're asking another bank for the card
-        AccountCard checkingCardBCP=diogo.askCard(BCP,CheckingAccountId);
+        AccountCard checkingCardBCP=diogo.askCard(BCP,diogoCheckingAccountId);
         // another person cannot ask for your cards
-        AccountCard checkingWrongPerson=pedro.askCard(CGD,CheckingAccountId);
+        AccountCard checkingWrongPerson=pedro.askCard(CGD,diogoCheckingAccountId);
 
         //its possible to lend your card
-        diogo.makeWithdraw(CGD,checkingCard,100);
-        pedro.makeWithdraw(CGD,checkingCard,200);
+        diogo.makeWithdraw(CGD,diogoCheckingCard,100);
+        pedro.makeWithdraw(CGD,diogoCheckingCard,200);
+
+
+        //pay a fee only on loan account due to negative balance
+        String pedroLoanAccountId = pedro.openAccount(BCP,AccountType.LOAN,100);
+        AccountCard pedroLoanCard=pedro.askCard(BCP,pedroLoanAccountId);
+        pedro.makeWithdraw(BCP,pedroLoanCard,150);
+
+
+        pedro.getMoneyOnWallet();
+        diogo.getMoneyOnWallet();
 
 
 
-        diogo.listAccounts();
+        diogo.listAccounts(CGD);
         //String Checking=diogo.getAccount(0);
         //String Savings=diogo.getAccount(1);
-        diogo.makeDeposit(CGD,CheckingAccountId,10);
+        diogo.makeDeposit(CGD,diogoCheckingAccountId,10);
     }
 }
