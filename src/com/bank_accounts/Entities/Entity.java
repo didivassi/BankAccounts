@@ -14,12 +14,15 @@ public abstract class  Entity {
     final protected List<String> bankAccounts = new ArrayList<String>();
     final protected String taxPayerIdCard;
     protected float moneyOnWallet;
+    protected String name;
 
 
-    public Entity(float moneyOnWallet){
+
+    public Entity(String name, float moneyOnWallet ){
         taxPayerCreated++;
         taxPayerIdCard =String.valueOf(taxPayerCreated);
         this.moneyOnWallet = moneyOnWallet;
+        this.name=name;
     }
 
     public String openAccount(Bank bank, AccountType accountType, float amount){
@@ -99,7 +102,7 @@ public abstract class  Entity {
 
     }
 
-    public String getAccount(int index){
+    public String getAccounts(int index){
         if(index<0 || index> bankAccounts.size()){
             return null;
         }
@@ -115,5 +118,9 @@ public abstract class  Entity {
 
     public float getMoneyOnWallet(){
         return moneyOnWallet;
+    }
+
+    public String getName() {
+        return name;
     }
 }

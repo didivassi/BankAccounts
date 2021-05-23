@@ -9,8 +9,11 @@ public class LoanAccount extends CardAccount{
     @Override
     protected void setBalance(float amount) {
         super.setBalance(amount);
-        if(super.getBalance()<0);
-        super.setBalance(-1);
-        System.out.println("u paid a fee for negative balance");
+        //pay a fee
+        if(super.getBalance()<0 && amount < 0){
+            super.setBalance(-1);
+            System.out.println("u paid a fee for negative balance");
+        }
+
     }
 }

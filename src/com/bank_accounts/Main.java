@@ -19,8 +19,8 @@ public class Main {
         Bank BCP3 = BankRegulator.createBank("BCP-");
 
         //create persons
-        Person diogo=new Person(4000f);
-        Person pedro=new Person(2000f);
+        Person diogo=new Person("Diogo", 4000f);
+        Person pedro=new Person("Pedro",2000f);
 
         //just checking  - to uncomment u need to make method public
         //System.out.println(diogo.getPersonIdCard());
@@ -52,6 +52,14 @@ public class Main {
         String pedroLoanAccountId = pedro.openAccount(BCP,AccountType.LOAN,100);
         AccountCard pedroLoanCard=pedro.askCard(BCP,pedroLoanAccountId);
         pedro.makeWithdraw(BCP,pedroLoanCard,150);
+
+        //make transfers
+        diogo.listAccounts(CGD);
+        pedro.listAccounts(BCP);
+        diogo.makeTransferTo(CGD, diogoSavingsAccountId, BCP, pedroLoanAccountId,200);
+
+        diogo.listAccounts(CGD);
+        pedro.listAccounts(BCP);
 
 
         pedro.getMoneyOnWallet();

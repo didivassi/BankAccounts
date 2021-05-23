@@ -95,6 +95,7 @@ public class Bank {
     }
 
     public void deposit(String accountId, float amount){
+        System.out.println("receiving  deposit "  + accountId);
         if(Utils.isNegativeAmount(amount)){
             return;
         }
@@ -106,23 +107,28 @@ public class Bank {
     }
 
     public void transferTo(Bank bankFrom, String accountIdFrom , Bank bankTo, String accountIdTo , float amount){
-
         if(Utils.isNegativeAmount(amount)){
             return;
         }
+
+
+
         Account accountFrom=getAccountFromId(accountIdFrom);
         if(accountFrom==null){
             return;
         }
-        if(isBalanceAllowed(accountFrom, amount)){
+
+        if(!isBalanceAllowed(accountFrom, amount)){
             return;
         }
         Account accountTo=bankTo.getAccountFromId(accountIdTo);
         if(accountTo==null){
+            System.out.println("There is no account at destination bank");
             return;
         }
         accountFrom.setBalance(-amount);
-        accountTo.setBalance(amount);
+        bankTo.deposit(accountIdTo,amount);
+
     }
 
 

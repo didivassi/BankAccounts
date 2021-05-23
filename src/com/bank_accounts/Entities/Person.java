@@ -6,9 +6,8 @@ import java.util.*;
 
 public class Person extends Entity{
 
-
-    public Person(float moneyOnWallet){
-       super(moneyOnWallet);
+    public Person( String name, float moneyOnWallet){
+       super(name, moneyOnWallet);
     }
 
 
